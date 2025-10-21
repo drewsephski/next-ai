@@ -3,8 +3,8 @@ import { auth } from '@/lib/auth';
 import { ConversationStorage } from '@/lib/conversation-storage';
 import { headers } from 'next/headers';
 
-// Force static generation for this API route
-export const dynamic = 'force-static';
+// Force dynamic generation for this API route since it handles dynamic conversation IDs
+export const dynamic = 'force-dynamic';
 
 // POST /api/conversations/[id]/messages - Add message to conversation
 export async function POST(
