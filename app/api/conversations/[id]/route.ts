@@ -3,8 +3,22 @@ import { auth } from '@/lib/auth';
 import { ConversationStorage } from '@/lib/conversation-storage';
 import { headers } from 'next/headers';
 
-// Force dynamic generation for this API route since it handles dynamic conversation IDs
-export const dynamic = 'force-dynamic';
+// Force static generation for this API route
+export const dynamic = 'force-static';
+
+// Generate static params for known conversation IDs
+export async function generateStaticParams() {
+  try {
+    // For static export, we need to provide some fallback parameters
+    // In a real app, you might query existing conversations here
+    return [
+      { id: 'new' }, // Fallback parameter for new conversations
+    ];
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [{ id: 'new' }];
+  }
+}
 
 // GET /api/conversations/[id] - Get specific conversation
 // PUT /api/conversations/[id] - Update conversation
@@ -21,6 +35,11 @@ export async function GET(
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Handle the 'new' fallback case - redirect to conversations list
+    if (params.id === 'new') {
+      return NextResponse.redirect(new URL('/api/conversations', request.url));
     }
 
     const conversation = await ConversationStorage.getConversations(session.user.id);
