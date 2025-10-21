@@ -3,6 +3,9 @@ import { getSubscriptionDetails } from "@/lib/subscription";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
+// Force static generation for this API route
+export const dynamic = 'force-static';
+
 export async function GET() {
   try {
     const result = await auth.api.getSession({

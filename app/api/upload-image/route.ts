@@ -1,6 +1,9 @@
 import { uploadImageAssets } from "@/lib/upload-image";
 import { NextRequest, NextResponse } from "next/server";
 
+// Force static generation for this API route
+export const dynamic = 'force-static';
+
 export const config = {
   api: { bodyParser: false }, // Disable default body parsing
 };

@@ -3,6 +3,9 @@ import { auth } from '@/lib/auth';
 import { ConversationStorage } from '@/lib/conversation-storage';
 import { headers } from 'next/headers';
 
+// Force static generation for this API route
+export const dynamic = 'force-static';
+
 // GET /api/conversations - List user's conversations
 // POST /api/conversations - Create new conversation
 export async function GET() {

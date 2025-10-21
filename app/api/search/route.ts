@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ExternalAPIService } from '@/lib/external-api';
 
+// Force static generation for this API route
+export const dynamic = 'force-static';
+
 // General search API endpoint that determines data source based on query
 export async function GET(request: NextRequest) {
   try {
