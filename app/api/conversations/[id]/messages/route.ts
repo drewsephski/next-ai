@@ -6,9 +6,10 @@ import { headers } from 'next/headers';
 // POST /api/conversations/[id]/messages - Add message to conversation
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const params = await context.params;
     const session = await auth.api.getSession({
       headers: await headers(),
     });

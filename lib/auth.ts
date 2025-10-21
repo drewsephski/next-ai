@@ -25,6 +25,7 @@ const polarClient = new Polar({
 });
 
 export const auth = betterAuth({
+  baseURL: process.env.NEXT_PUBLIC_APP_URL,
   trustedOrigins: [
     `${process.env.NEXT_PUBLIC_APP_URL}`,
     `${process.env.NEXT_PUBLIC_APP_URL}/sign-in`,

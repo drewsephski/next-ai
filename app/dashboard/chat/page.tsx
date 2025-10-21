@@ -608,7 +608,7 @@ export default function Chat() {
                             key={index}
                             variant="outline"
                             size="sm"
-                            className="text-left h-auto py-2 px-3 text-xs justify-start whitespace-normal hover:bg-muted/50 transition-colors"
+                            className="text-left h-auto py-2 px-3 text-xs justify-start whitespace-normal hover:bg-muted/50 hover:text-foreground transition-colors"
                             onClick={() => handleStarterClick(starter)}
                           >
                             {starter}

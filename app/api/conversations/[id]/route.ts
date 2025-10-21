@@ -8,9 +8,10 @@ import { headers } from 'next/headers';
 // DELETE /api/conversations/[id] - Delete conversation
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const params = await context.params;
     const session = await auth.api.getSession({
       headers: await headers(),
     });
@@ -49,9 +50,10 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const params = await context.params;
     const session = await auth.api.getSession({
       headers: await headers(),
     });
@@ -101,9 +103,10 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const params = await context.params;
     const session = await auth.api.getSession({
       headers: await headers(),
     });
