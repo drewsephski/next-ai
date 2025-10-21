@@ -83,3 +83,29 @@ export const subscription = pgTable("subscription", {
   customFieldData: text("customFieldData"), // JSON string
   userId: text("userId").references(() => user.id),
 });
+
+// Conversations table for chat conversations
+export const conversation = pgTable("conversation", {
+  id: text("id").primaryKey(),
+  title: text("title").notNull(),
+  userId: text("userId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+  aiPersonality: text("aiPersonality").default("casual"), // formal, casual, expert
+  customPrompt: text("customPrompt"), // User-defined system instructions
+});
+
+// Messages table for individual chat messages
+export const message = pgTable("message", {
+  id: text("id").primaryKey(),
+  conversationId: text("conversationId")
+    .notNull()
+    .references(() => conversation.id, { onDelete: "cascade" }),
+  role: text("role").notNull(), // user, assistant, system
+  content: text("content").notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+  metadata: text("metadata"), // JSON string for additional data
+});

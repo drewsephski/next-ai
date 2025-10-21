@@ -10,7 +10,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
-import { Check } from "lucide-react";
+import {
+  Code,
+  Shield,
+  CreditCard,
+  Bot,
+  Database,
+  Upload,
+  Palette,
+  BarChart,
+  Zap,
+  Rocket,
+} from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -63,7 +74,6 @@ export default function PricingTable({
       router.push("/sign-in");
       return;
     }
-
     try {
       await authClient.checkout({
         products: [productId],
@@ -109,53 +119,88 @@ export default function PricingTable({
   };
 
   return (
-    <section className="flex flex-col items-center justify-center px-4 mb-24 w-full">
+    <section className="flex flex-col items-center justify-center px-4 py-12 w-full mx-auto bg-white dark:bg-black text-black dark:text-white">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-medium tracking-tight mb-4">
-          Fake Subscription
+          Complete SaaS Boilerplate
         </h1>
         <p className="text-xl text-muted-foreground">
-          Test out this starter kit using this fake subscription.
+          Production-ready SaaS starter kit with everything you need to launch your business
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 max-w-4xl w-full">
+      <div className="flex justify-center items-center max-w-4xl w-full mx-auto">
         {/* Starter Tier */}
-        <Card className="relative h-fit">
+        <Card className="h-fit dark:bg-zinc-900 w-full max-w-lg">
           {isCurrentPlan(STARTER_TIER) && (
             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
               <Badge
                 variant="secondary"
-                className="bg-green-100 text-green-800"
+                className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
               >
                 Current Plan
               </Badge>
             </div>
           )}
           <CardHeader>
-            <CardTitle className="text-2xl">Starter</CardTitle>
-            <CardDescription>Perfect for getting started</CardDescription>
+            <CardTitle className="text-2xl">Complete SaaS Boilerplate</CardTitle>
+            <CardDescription className="text-lg">Production-ready enterprise SaaS starter kit</CardDescription>
             <div className="mt-4">
-              <span className="text-4xl font-bold">$1,000</span>
-              <span className="text-muted-foreground">/month</span>
+              <span className="text-4xl font-bold">$79</span>
+              <span className="text-muted-foreground"> one-time</span>
             </div>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Check className="h-5 w-5 text-green-500" />
-              <span>5 Projects</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Check className="h-5 w-5 text-green-500" />
-              <span>10GB Storage</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Check className="h-5 w-5 text-green-500" />
-              <span>1 Team Member</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Check className="h-5 w-5 text-green-500" />
-              <span>Email Support</span>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 gap-4">
+              {/* Row 1 */}
+              <div className="flex items-center gap-3">
+                <Code className="h-5 w-5 text-green-500 shrink-0" />
+                <span className="font-medium">Next.js 15 + TypeScript</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Shield className="h-5 w-5 text-green-500 shrink-0" />
+                <span className="font-medium">Enterprise Authentication</span>
+              </div>
+
+              {/* Row 2 */}
+              <div className="flex items-center gap-3">
+                <CreditCard className="h-5 w-5 text-green-500 shrink-0" />
+                <span className="font-medium">Subscription Management</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Bot className="h-5 w-5 text-green-500 shrink-0" />
+                <span className="font-medium">AI-Powered Chatbot</span>
+              </div>
+
+              {/* Row 3 */}
+              <div className="flex items-center gap-3">
+                <Database className="h-5 w-5 text-green-500 shrink-0" />
+                <span className="font-medium">Production Database</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Upload className="h-5 w-5 text-green-500 shrink-0" />
+                <span className="font-medium">Advanced File Storage</span>
+              </div>
+
+              {/* Row 4 */}
+              <div className="flex items-center gap-3">
+                <Palette className="h-5 w-5 text-green-500 shrink-0" />
+                <span className="font-medium">Modern UI Framework</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <BarChart className="h-5 w-5 text-green-500 shrink-0" />
+                <span className="font-medium">Analytics & Monitoring</span>
+              </div>
+
+              {/* Row 5 */}
+              <div className="flex items-center gap-3">
+                <Zap className="h-5 w-5 text-green-500 shrink-0" />
+                <span className="font-medium">Additional Features</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Rocket className="h-5 w-5 text-green-500 shrink-0" />
+                <span className="font-medium">Production Ready</span>
+              </div>
             </div>
           </CardContent>
           <CardFooter>
@@ -193,7 +238,7 @@ export default function PricingTable({
       <div className="mt-12 text-center">
         <p className="text-muted-foreground">
           Need a custom plan?{" "}
-          <span className="text-primary cursor-pointer hover:underline">
+          <span className="text-primary cursor-pointer hover:underline dark:text-white">
             Contact us
           </span>
         </p>

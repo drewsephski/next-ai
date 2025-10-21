@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "../components/provider";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
+
 export const metadata: Metadata = {
   title: "Next.js Starter Kit - Launch Your SAAS",
   description:
@@ -33,12 +34,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-[-apple-system,BlinkMacSystemFont]antialiased`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:ital,opsz,wght@0,12..96,200..800;1,12..96,200..800&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+        <script>hljs.highlightAll();</script>
+      </head>
+      <body className="font-bricolage antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem
-          forcedTheme="light"
           disableTransitionOnChange
         >
           {children}

@@ -25,11 +25,16 @@ const polarClient = new Polar({
 });
 
 export const auth = betterAuth({
-  trustedOrigins: [`${process.env.NEXT_PUBLIC_APP_URL}`],
+  trustedOrigins: [
+    `${process.env.NEXT_PUBLIC_APP_URL}`,
+    `${process.env.NEXT_PUBLIC_APP_URL}/sign-in`,
+    `${process.env.NEXT_PUBLIC_APP_URL}/sign-up`,
+    `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,
+  ],
   allowedDevOrigins: [`${process.env.NEXT_PUBLIC_APP_URL}`],
   cookieCache: {
     enabled: true,
-    maxAge: 5 * 60, // Cache duration in seconds
+    maxAge: 60 * 60 * 24 * 7, // 7 days for better middleware support
   },
   database: drizzleAdapter(db, {
     provider: "pg",
@@ -174,6 +179,7 @@ export const auth = betterAuth({
                     },
                   });
 
+
                 console.log("✅ Upserted subscription:", data.id);
               } catch (error) {
                 console.error(
@@ -190,3 +196,14 @@ export const auth = betterAuth({
     nextCookies(),
   ],
 });
+
+// Server-side session validation for middleware (Edge Runtime compatible)
+export const validateRequest = async (headers: Headers) => {
+  try {
+    // Use the auth API to get session - this should work in Edge Runtime
+    return await auth.api.getSession({ headers });
+  } catch (error) {
+    console.error("Session validation error:", error);
+    return null;
+  }
+};
