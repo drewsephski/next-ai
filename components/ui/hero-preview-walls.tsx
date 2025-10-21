@@ -16,7 +16,7 @@ type Card = {
   image: string;
 };
 
-let interval: any;
+let interval: NodeJS.Timeout;
 
 // ---------------------------
 // CardSlide Component
